@@ -15,11 +15,15 @@ class Player
     end
 
     if @health > warrior.health
-      puts "RUSH! " + @health+ " > " + warrior.health
+      print "RUSH! ", @health, " > ", warrior.health, "\n"
       @need_heal = false
     end
 
     @health = warrior.health
+
+    if warrior.feel.captive?
+      return warrior.rescue!
+    end
 
     if @need_heal && !warrior.feel.empty?
       return warrior.walk!(:backward)
